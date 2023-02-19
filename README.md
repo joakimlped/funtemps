@@ -4,6 +4,7 @@ import (
 	"math"
 	"reflect"
 	"testing"
+	"converter"
 )
 
 // Konverterer Fahrenheit til Celsius
