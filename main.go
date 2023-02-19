@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	"github.com/joakimlped/funtemps/conv"
 )
 
 var (
