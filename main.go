@@ -3,94 +3,63 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strings"
 )
 
-var fahr float64
-var out string
-var funfactsArg string
-var tempScale string
+var (
+	fahrenheit float64
+	celsius    float64
+	kelvin     float64
+	outUnit    string
+)
 
 func init() {
-	flag.Float64Var(&fahr, "F", 0.0, "temperatur i grader fahrenheit")
-	flag.StringVar(&out, "out", "C", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
-	flag.StringVar(&funfactsArg, "funfacts", "", "\"fun-facts\" om sun - Solen, luna - Månen og terra - Jorden")
-	flag.StringVar(&tempScale, "t", "C", "temperaturskala for fun-fact (C, F eller K)")
+	flag.Float64Var(&fahrenheit, "F", 0.0, "temperature in degrees Fahrenheit")
+	flag.Float64Var(&celsius, "C", 0.0, "temperature in degrees Celsius")
+	flag.Float64Var(&kelvin, "K", 0.0, "temperature in Kelvin")
+	flag.StringVar(&outUnit, "out", "C", "output unit, can be 'C' for Celsius, 'F' for Fahrenheit or 'K' for Kelvin")
 }
 
 func main() {
 	flag.Parse()
 
-	if flag.NFlag() == 0 || (flag.NFlag() == 1 && isFlagPassed("funfacts")) {
-		flag.Usage()
-		return
-	}
-
-	if isFlagPassed("F") && isFlagPassed("C") {
-		fmt.Println("Kan ikke bruke flaggene -F og -C samtidig.")
-		return
-	}
-
-	if isFlagPassed("F") && isFlagPassed("K") {
-		fmt.Println("Kan ikke bruke flaggene -F og -K samtidig.")
-		return
-	}
-
-	if isFlagPassed("C") && isFlagPassed("K") {
-		fmt.Println("Kan ikke bruke flaggene -C og -K samtidig.")
-		return
-	}
-
-	if isFlagPassed("funfacts") && !isFlagPassed("t") {
-		fmt.Println("Må spesifisere -t flagget når man bruker -funfacts.")
-		return
-	}
-
-	if isFlagPassed("F") {
-		if out == "C" {
-			fmt.Printf("%g°F er %g°C\n", fahr, conv.FahrenheitToCelsius(fahr))
-		} else if out == "K" {
-			fmt.Printf("%g°F er %gK\n", fahr, conv.FahrenheitToKelvin(fahr))
-		} else if out == "F" {
-			fmt.Printf("%g°F\n", fahr)
-		}
-	} else if isFlagPassed("C") {
-		if out == "F" {
-			fmt.Printf("%g°C er %g°F\n", fahr, conv.CelsiusToFahrenheit(fahr))
-		} else if out == "K" {
-			fmt.Printf("%g°C er %gK\n", fahr, conv.CelsiusToKelvin(fahr))
-		} else if out == "C" {
-			fmt.Printf("%g°C\n", fahr)
-		}
-	} else if isFlagPassed("K") {
-		if out == "C" {
-			fmt.Printf("%gK er %g°C\n", fahr, conv.KelvinToCelsius(fahr))
-		} else if out == "F" {
-			fmt.Printf("%gK er %g°F\n", fahr, conv.KelvinToFahrenheit(fahr))
-		} else if out == "K" {
-			fmt.Printf("%gK\n", fahr)
+	// Check that only one input flag is set
+	numInputFlags := 0
+	for _, arg := range []float64{fahrenheit, celsius, kelvin} {
+		if arg != 0 {
+			numInputFlags++
 		}
 	}
+	if numInputFlags != 1 {
+		fmt.Println("Error: please specify one input flag only (-C, -F, -K)")
+		return
+	}
 
-	if isFlagPassed("funfacts") && isFlagPassed("t") {
-		funfact := ""
-		if strings.ToLower(funfactsArg) == "sun" {
-			funfact = funfacts.SunFunFact(tempScale)
-		} else if strings.ToLower(funfactsArg) == "luna" {
-			funfact = funfacts.LunaFunFact(tempScale)
-		} else if strings.ToLower(funfactsArg) == "terra" {
-			funfact = funfacts.TerraFunFact(tempScale)
-		} else {
-			fmt.Println("Ugyldig funfacts valg, tillatte verdier: sun, luna, terra")
-			return
-		}
+	var inputTemp, outputTemp float64
+	var inputUnit string
 
-		fmt.Println(funfact)
+	if fahrenheit != 0 {
+		inputTemp = fahrenheit
+		inputUnit = "F"
+	} else if celsius != 0 {
+		inputTemp = celsius
+		inputUnit = "C"
+	} else if kelvin != 0 {
+		inputTemp = kelvin
+		inputUnit = "K"
+	}
+
+	switch outUnit {
+	case "C":
+		outputTemp = conv.ToCelsius(inputTemp, inputUnit)
+		fmt.Printf("%.2f%s = %.2fC\n", inputTemp, inputUnit, outputTemp)
+	case "F":
+		outputTemp = conv.ToFahrenheit(inputTemp, inputUnit)
+		fmt.Printf("%.2f%s = %.2fF\n", inputTemp, inputUnit, outputTemp)
+	case "K":
+		outputTemp = conv.ToKelvin(inputTemp, inputUnit)
+		fmt.Printf("%.2f%s = %.2fK\n", inputTemp, inputUnit, outputTemp)
+	default:
+		fmt.Printf("Error: invalid output unit specified: %s\n", outUnit)
+		return
 	}
 }
-
-func isFlagPassed(s string) {
-	panic("unimplemented")
-}
-
-		
