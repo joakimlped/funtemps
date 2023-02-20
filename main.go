@@ -51,24 +51,33 @@ func main() {
 
 	switch outUnit {
 	case "C":
-		outputTemp = conv.FahrenheitToCelsius(inputTemp)
-		fmt.Printf("%.2f%s = %.2fC\n", inputTemp, inputUnit, outputTemp)
-
-		outputTemp = conv.KelvinToCelsius(inputTemp)
+		if inputUnit == "F" {
+			outputTemp = conv.FahrenheitToCelsius(inputTemp)
+		} else if inputUnit == "K" {
+			outputTemp = conv.KelvinToCelsius(inputTemp)
+		} else {
+			outputTemp = inputTemp
+		}
 		fmt.Printf("%.2f%s = %.2fC\n", inputTemp, inputUnit, outputTemp)
 
 	case "F":
-		outputTemp = conv.CelsiusToFahrenheit(inputTemp)
-		fmt.Printf("%.2f%s = %.2fF\n", inputTemp, inputUnit, outputTemp)
-
-		outputTemp = conv.KelvinToFahrenheit(inputTemp)
+		if inputUnit == "C" {
+			outputTemp = conv.CelsiusToFahrenheit(inputTemp)
+		} else if inputUnit == "K" {
+			outputTemp = conv.KelvinToFahrenheit(inputTemp)
+		} else {
+			outputTemp = inputTemp
+		}
 		fmt.Printf("%.2f%s = %.2fF\n", inputTemp, inputUnit, outputTemp)
 
 	case "K":
-		outputTemp = conv.CelsiusToKelvin(inputTemp)
-		fmt.Printf("%.2f%s = %.2fK\n", inputTemp, inputUnit, outputTemp)
-
-		outputTemp = conv.FahrenheitToKelvin(inputTemp)
+		if inputUnit == "C" {
+			outputTemp = conv.CelsiusToKelvin(inputTemp)
+		} else if inputUnit == "F" {
+			outputTemp = conv.FahrenheitToKelvin(inputTemp)
+		} else {
+			outputTemp = inputTemp
+		}
 		fmt.Printf("%.2f%s = %.2fK\n", inputTemp, inputUnit, outputTemp)
 
 	default:
