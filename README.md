@@ -1,4 +1,4 @@
-<h1>Funtemps konverteringsprogram</h1>
+<h1>Funtemps </h1>
 
 Dette programmet skal konvertere en bestemt temperatur i en bestemt måleenhet over til en annen. For eksempel vil den konvertere gradene fra Celsius over til Fahrenheit eller Kelvin.
 
