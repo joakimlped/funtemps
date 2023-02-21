@@ -14,7 +14,7 @@ Flaggene gitt er :
 -out: kommer med resultat for en av de andre flaggene.
 
 Programmet vil fungere slik:
-go run main.go -C 30 -out K
+Funtemps -C 30 -out K
 30.00C = 303.15K
 
 <h1>Lisens</h1>
