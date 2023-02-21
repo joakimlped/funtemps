@@ -3,7 +3,7 @@
 Dette programmet skal konvertere en bestemt temperatur i en bestemt måleenhet over til en annen. For eksempel vil den konvertere gradene fra Celsius over til Fahrenheit eller Kelvin.
 
 <h1>Installasjon</h1>
-For å ta i bruk dette programmet kreves programmet Go installert på maskinen.
+For å ta i bruk dette programmet kreves Go installert på maskinen.
 
 <h1>Bruk</h1>
 Programmet henter data ved hjelp av flagg, og skriver ut svar til standard output (stdout).
