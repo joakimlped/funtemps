@@ -1,4 +1,4 @@
-Funtemps konverteringsprogram
+<h1>Funtemps konverteringsprogram</h1>
 
 Dette programmet skal konvertere en bestemt temperatur i en bestemt måleenhet over til en annen. For eksempel vil den konvertere gradene fra Celsius over til Fahrenheit eller Kelvin.
 
@@ -15,5 +15,5 @@ Programmet vil fungere slik:
 go run main.go -C 30 -out K
 30.00C = 303.15K
 
-Lisens
+<h1>Lisens</h1>
 Dette programmet er lisensiert under MIT-lisensen. Se LICENSE-filen for mer informasjon.
