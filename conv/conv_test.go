@@ -14,7 +14,7 @@ func TestFahrenheitToCelsius(t *testing.T) {
 
 	tests := []test{
 		{input: 134, want: 56.67},
-		// add more test cases here
+		// flere tester her
 	}
 
 	for _, tc := range tests {
@@ -33,7 +33,7 @@ func TestCelsiusToFahrenheit(t *testing.T) {
 
 	tests := []test{
 		{input: 25, want: 77},
-		// add more test cases here
+		// flere tester her
 	}
 
 	for _, tc := range tests {
@@ -109,7 +109,7 @@ func TestKelvinToCelsius(t *testing.T) {
 
 	tests := []test{
 		{input: 273.15, want: 0},
-		// add more test cases here
+		// flere tester her
 	}
 
 	for _, tc := range tests {
